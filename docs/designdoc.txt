@@ -1,0 +1,43 @@
+This design document is a small but concise summary of my game design goals
+
+Overview
+A relatively mature architectured game
+A deterministic scrolling space shooter with fixed levels, score attack, and high scores killing strange bio-organic
+foes
+
+Gameplay loop:
+    The play plays a small fighter moving through a vertically scrolling shooter
+    Enemies, debris and powerups spawn over time, threatening the player and giving them potential goals
+    The player has a health bar and can get health pickups
+
+Game Mechanics:
+    Player has a small, maneuverable fighter that can produce a constant bullet stream with no cost
+    The player can fire MISSILES with limited ammo, and sometimes screen clearing BOMBS
+    MISSILES do large amount of damage in a small splash damage region
+    Enemies attack the player by either SHOOTING or RAMMING the player, causing the player to loose HEALTH
+    ASTEROIDS also cause damage, but are more easily maneuvered around
+    If the PLAYER HEALTH becomes Zero, they will loose a CONTINUE
+    If the player has no CONTINUES, they must start the level over
+    Over time, health pickups, score pickups, and missiles will drop for the player
+
+Implementation Goals:
+    One static and one random scrolling game level
+    Player can move and shoot bullets through level
+    Game ends when player finishes level
+    Score is recorded in local highscore table
+    Enemies have animation and an explosion death animation
+    Three enemies:
+        +Swarming melee
+        +Ranged enemies
+        +Asteroids
+    Powerups:
+        +Health Token
+        + Score Token
+
+Resources needed:
+    ~ player anim
+    + health token
+    ~ swarm enemy
+    - shoot enemy
+    - gold token
+    - ui
