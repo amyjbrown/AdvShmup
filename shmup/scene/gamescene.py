@@ -3,9 +3,9 @@
 Gamescene
 Where almost everything lives and works
 """
-import pygame as pg
-import inputhandler
+import background
 import entity.entityhandler as entityhandler
+import inputhandler
 import scene.scenebase
 from config import *
 
@@ -24,26 +24,36 @@ class GameScene(scene.scenebase.Scene):
         self.score = 0
         self.lives = 3
 
+        self.background = None
+
         # game
         # Todo Screenbackground
         # Todo background = scroller()
 
         self.game_progress = 0.0
 
-    def load(self, level=0):
+    def add_score(self, score, combo):
+        """Adds any scored points to score"""
+        self.score += score
+
+    def load(self, level=0, reset=False):
         """
         Overload
 
         Args:
-            level: number id of level to be loaded
+            level (int): number id of level to be loaded
+            reset (bool): fully reset Game on level if True
 
         Returns:
             None
         """
-
-        # TODO: loading in level properly
-        self.entity_handler.setup()
-        self.game_progress = 0
+        if reset:
+            self.entity_handler.setup()
+            self.game_progress = 0.0
+            self.background = background.BackGround(
+                "../assets/BG1.bmp",
+                speed=FPS
+            )
 
     def handle_input(self, event):
         if event.type == "menu":
@@ -68,4 +78,10 @@ class GameScene(scene.scenebase.Scene):
     def update(self, dt):
         self.player.update(dt)
         self.entity_handler.update(dt)
-        self.background.scroll(dt)
+        self.background.update(dt)
+        if self.player.health <= 0:
+            self.final = True
+
+    def draw(self, screen):
+        self.background.draw(screen)
+        self.entity_handler.draw(screen)

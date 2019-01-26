@@ -63,9 +63,9 @@ class Actor(pg.sprite.Sprite):
         super().__init__(*groups)
         self.position = pg.Vector2(position)
         self.velocity = pg.Vector2()  # Initialize to zero, unless set otherwise
-        self.hitbox = pg.Rect(self.HITBOX)
-        self.rect = pg.Rect(self.RECT)
-        self.image = pg.Surface(self.IMAGE)
+        self.hitbox = pg.Rect(self.HITBOX).move(*position)
+        self.rect = pg.Rect(self.RECT).move(*position)
+        self.image = self.IMAGE
         self.health = self.MAX_HEALTH
 
     @classmethod

@@ -9,6 +9,23 @@ TODO: Fully Implement EntityHandler
 import pygame as pg
 
 
+# TODO move this collision function elsewhere
+def hit_collide(a, b):
+    """
+    Check if two sprites hitboxes are interacting
+
+    Args:
+        a (Sprite): Sprite A to be collided. Must have hitbox field
+        b (Sprite): Sprite B to check Collision. Must have hitbox field
+
+    Returns:
+        True is hitboxes are colliding, Fale otherwise
+    """
+    if a.hitbox.collide(b.hitbox):
+        return True
+    return False
+
+
 class EntityHandler:
     """
     Entity controller and _handler
@@ -36,6 +53,7 @@ class EntityHandler:
         self.enemy_bullets = pg.sprite.Group()
         self.effects = pg.sprite.Group()
         # Internal handling
+        self.groups = [self.effects, self.enemy, self.enemy_bullets, self.bullets, self.powerups]
         return
 
     def setup(self):
@@ -54,21 +72,39 @@ class EntityHandler:
         Returns:
             None
         """
-        pass
+        # Updates and handles player status and all entities movement
+        self.player.update(dt)
+        for g in self.groups:
+            g.update(dt)
+
+        for enemy in pg.sprite.spritecollide(self.player, self.enemy, False, collided=hit_collide):
+            enemy.collide(self.player)
+
+        for bullet in pg.sprite.spritecollide(self.player, self.enemy_bullets, dokill=True, collided=hit_collide):
+            bullet.collide(self.player)
+
+        for token in pg.sprite.spritecollide(self.player, self.powerups, dokill=False, collided=hit_collide):
+            token.effect(self.player)
+
+        for colissions in pg.sprite.spritecollide(self.player, self.powerups, dokill=False, collided=hit_collide):
+            pass  # TODO the collisions detection bit
+
 
     def draw(self, screen):
-        # TODO: Implement
-        pass
+        screen.blit(
+            self.player,
+            self.player.rect
+        )
+        for g in self.groups:
+            g.draw(screen)
 
-    def kill(self):
+    def clear_enemy(self):
         """
-        Kills all on screen entities
-
-        Returns:
-            None
+        Clears all animations, enemies and bullets
         """
-        # Todo implement
-        pass
+        self.enemy.empty()
+        self.enemy_bullets.empty()
+        self.effects.empty()
 
     def score(self, score, combo=False):
         """
@@ -80,5 +116,5 @@ class EntityHandler:
         Returns:
             None
         """
-        self.observer.score()
+        self.observer.add_score(score, combo)
         return

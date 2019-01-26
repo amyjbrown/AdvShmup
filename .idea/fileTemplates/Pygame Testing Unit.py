@@ -8,10 +8,10 @@ import shmup.inputhandler as inputhandler
 
 # setup
 pg.init()
-inputhandler.setup(KEY_MAP)
+inputhandler.setup(DEBUG_MAP)
 screen = pg.display.set_mode(GAME_AREA)
 
-# test items go here
+
 
 # gameloop
 game = True
@@ -21,6 +21,8 @@ while game:
     for event in inputhandler.get():
         if event.key == "QUIT":
             game = False
+        elif event.key == "console":
+            pass
         # Event based code goes here
     # Loop based code goes here
     pg.display.flip()
