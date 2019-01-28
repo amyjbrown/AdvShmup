@@ -1,2 +1,4 @@
-TODO
-This is a re-implimentation of my original Shmup project, but with more coherent structure this time
+Next:
+    Add player Bullet
+    Add player firing mechanic
+    Add powerup

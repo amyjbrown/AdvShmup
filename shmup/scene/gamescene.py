@@ -2,9 +2,10 @@
 """
 Gamescene
 Where almost everything lives and works
+TODO: Move all entity handler code into here
 """
 import background
-import entity.entityhandler as entityhandler
+import entity
 import inputhandler
 import scene.scenebase
 from config import *
@@ -16,27 +17,33 @@ class GameScene(scene.scenebase.Scene):
     """
     def __init__(self):
         super().__init__()
-        # Entity Handler setup
-        self.entity_handler = entityhandler.EntityHandler(self)
-        self.player = self.entity_handler.player
-
-        # base game objects
+        # base game values
+        self.level = None
+        self.level_data = None  # This is where level data will live
         self.score = 0
         self.lives = 3
 
         self.background = None
 
-        # game
-        # Todo Screenbackground
-        # Todo background = scroller()
+        # Entity groups
+
+        self.player = None
+        self.player_group = pg.sprite.GroupSingle()
+        self.enemy = pg.sprite.Group()
+        self.powerups = pg.sprite.Group()
+        self.bullets = pg.sprite.Group()
+        self.enemy_bullets = pg.sprite.Group()
+        self.effects = pg.sprite.Group()
+        # Internal handling
+        self.groups = [self.effects, self.enemy, self.enemy_bullets, self.bullets, self.powerups]
 
         self.game_progress = 0.0
 
-    def add_score(self, score, combo):
+    def add_score(self, score, combo=False):
         """Adds any scored points to score"""
         self.score += score
 
-    def load(self, level=0, reset=False):
+    def load(self, level=None, reset=True):
         """
         Overload
 
@@ -48,17 +55,20 @@ class GameScene(scene.scenebase.Scene):
             None
         """
         if reset:
-            self.entity_handler.setup()
-            self.game_progress = 0.0
-            self.background = background.BackGround(
-                "../assets/BG1.bmp",
-                speed=FPS
-            )
+            # Do all enetity setup
+            entity.Player.setup(self)
+
+            for enemy in entity.Enemy:
+                enemy.setup(self)
+
+            self.player = entity.Player((100, 100), self.player_group)
+
+            self.background = background.BackGround("../assets/BG1.bmp", FPS)
 
     def handle_input(self, event):
-        if event.type == "menu":
+        if event.key == "menu":
             self.final = True
-        elif event.type == "QUIT":
+        elif event.key == "QUIT":
             self.final = True
 
         if inputhandler.poll_button("up") and not inputhandler.poll_button("down"):
@@ -76,12 +86,34 @@ class GameScene(scene.scenebase.Scene):
             self.player.velocity.x = 0
 
     def update(self, dt):
+        # Updates and handles player status and all entities movement
         self.player.update(dt)
-        self.entity_handler.update(dt)
-        self.background.update(dt)
+        for g in self.groups:
+            g.update(dt)
+
+        # Do all collision detection
+        for enemy in pg.sprite.spritecollide(self.player, self.enemy, False,
+                                             collided=entity.hit_collide):
+            enemy.collide(self.player)
+
+        for bullet in pg.sprite.spritecollide(self.player, self.enemy_bullets,
+                                              dokill=True, collided=entity.hit_collide):
+            bullet.collide(self.player)
+
+        for token in pg.sprite.spritecollide(self.player, self.powerups,
+                                             dokill=False, collided=entity.hit_collide):
+            token.effect(self.player)
+
+        for bullet, enemy in pg.sprite.groupcollide(self.bullets, self.enemy,
+                                                    dokilla=False, dokillb=False,
+                                                    collided=entity.hit_collide).items():
+            bullet.collide(enemy)
+
+        # if the player is at zero health, do appropriate transition
         if self.player.health <= 0:
             self.final = True
 
     def draw(self, screen):
         self.background.draw(screen)
-        self.entity_handler.draw(screen)
+        for g in self.groups:
+            g.draw(screen)
