@@ -9,8 +9,8 @@ Contains all Projectile and Bullet objects and logic
 *Zap: Enemy Bullet
 """
 import pygame as pg
-from config import *
-import spritesheet
+from shmup.config import *
+import shmup.spritesheet as spritesheet
 
 
 class Bullet(pg.sprite.Sprite):

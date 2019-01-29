@@ -7,16 +7,16 @@ Gamescene should have a simple moving player object, a scrolling background, and
 
 """
 import pygame as pg
-from config import *
+from shmup.config import *
 import shmup.inputhandler as inputhandler
-import scene.gamescene
+import shmup.scene.gamescene as gamescene
 
 # setup
 pg.init()
 inputhandler.setup(DEBUG_MAP)
 screen = pg.display.set_mode(GAME_AREA)
 
-Scene = scene.gamescene.GameScene()
+Scene = gamescene.GameScene()
 Scene.load(reset=True)
 
 # gameloop

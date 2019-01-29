@@ -6,7 +6,7 @@ PASS
 # Import
 import pygame as pg
 import shmup.inputhandler as inputhandler
-from config import *
+from shmup.config import *
 # Setup
 pg.init()
 inputhandler.setup(KEY_MAP)

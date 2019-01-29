@@ -4,16 +4,16 @@ Actor and Play
 Testing Player Startup, screen loading, and simple movement
 PASS 1/25/2019
 """
-import entity.actor.player
+import shmup.entity.actor.player as player
 import shmup.inputhandler as inputhandler
-from config import *
+from shmup.config import *
 
 # setup
 pg.init()
 inputhandler.setup(DEBUG_MAP)
 screen = pg.display.set_mode(GAME_AREA)
 
-Player = entity.actor.player.Player
+Player = player.Player
 Player.setup(None)  # None is fine since you do no operations on it
 
 SPEED = 90  # Pixels per second

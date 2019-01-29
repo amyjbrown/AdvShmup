@@ -5,9 +5,9 @@ PASS
 """
 
 import pygame as pg
-from config import *
+from shmup.config import *
 import shmup.inputhandler as inputhandler
-import background
+import shmup.background as background
 
 pg.init()
 inputhandler.setup(DEBUG_MAP)

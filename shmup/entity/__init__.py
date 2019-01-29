@@ -6,10 +6,10 @@ Container and reference for all actors and entities
 todo load in and finish enemies
 todo executive decisions: Drop entityhandler and use Scene as Observer?
 """
-import entity.actor.player
+import shmup.entity.actor.player as player
 
 # Type aliases
-Player = entity.actor.player.Player
+Player = player.Player
 
 Enemy = list()
 

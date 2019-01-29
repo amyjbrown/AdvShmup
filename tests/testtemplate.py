@@ -8,7 +8,7 @@ Notes:
     Notes go here
 """
 import pygame as pg
-from config import *
+from shmup.config import *
 import shmup.inputhandler as inputhandler
 
 

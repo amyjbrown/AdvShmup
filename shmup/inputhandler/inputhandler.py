@@ -12,7 +12,7 @@ This provides the core foundation of the structure
 *Global get(), poll_button(), handlers for singleton usage
 """
 import pygame as pg
-import inputhandler.event as event
+import shmup.inputhandler.event as event
 Event = event.Event
 
 

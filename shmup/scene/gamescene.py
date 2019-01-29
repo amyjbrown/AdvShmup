@@ -4,14 +4,16 @@ Gamescene
 Where almost everything lives and works
 TODO: Move all entity handler code into here
 """
-import background
-import entity
-import inputhandler
-import scene.scenebase
-from config import *
+import shmup.background as background
+import shmup.entity as entity
+import shmup.inputhandler as inputhandler
+import shmup.scene.scenebase as scenebase
+from shmup.config import *
+
+inputhandler.setup(DEBUG_MAP)
 
 
-class GameScene(scene.scenebase.Scene):
+class GameScene(scenebase.Scene):
     """
     GameScene
     """

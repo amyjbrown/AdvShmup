@@ -7,9 +7,9 @@ PASS 1/25/2019 12: 12
 import pygame as pg
 import os.path
 from pprint import pprint
-from config import *
+from shmup.config import *
 import shmup.inputhandler as inputhandler
-import spritesheet
+import shmup.spritesheet as spritesheet
 
 # setup
 pg.init()

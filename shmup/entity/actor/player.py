@@ -4,8 +4,8 @@ Player base object
 
 *Player
 """
-import entity.actor.actor as actor
-from config import *
+import shmup.entity.actor.actor as actor
+from shmup.config import *
 
 
 class Player(actor.Actor):

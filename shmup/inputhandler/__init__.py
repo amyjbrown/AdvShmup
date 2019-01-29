@@ -11,7 +11,7 @@ Attributes:
     _handler (InputHandler_t): EventHandler object to be used globally
 """
 import pygame as pg
-import inputhandler.inputhandler as inputhandler
+import shmup.inputhandler.inputhandler as inputhandler
 
 # Define Globals
 _setup_flag = False
