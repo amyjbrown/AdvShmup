@@ -72,6 +72,24 @@ class GameScene(scenebase.Scene):
             self.final = True
         elif event.key == "QUIT":
             self.final = True
+        elif event.key == "debug1" and event.down:
+            print("Player velcoity: ",
+                  self.player.vx, self.player.vy)
+
+        # movement handling
+
+        #        elif event.key == "down":
+        #            # If player is not moving, set players downward velocity
+        #            if event.down and (self.player.vy == 0.0):
+        #                self.player.vy = self.player.speed
+        #            # If player is moving upwards, pressing down will cancel it out
+        #            elif event.down and self.player.vy > 0.0:
+        #                self.player.vy = 0
+        #            # If player is moving down and lets go of the down key, player will stop moving
+        #            elif event.up and self.player.vy > 0.0:
+        #                self.player.speed = 0
+        #            elif event.up and self.player.vy == 0.0:
+        #                self.player.vy = -self.player.speed
 
         if inputhandler.poll_button("up") and not inputhandler.poll_button("down"):
             self.player.velocity.y = self.player.speed * -1
@@ -88,6 +106,7 @@ class GameScene(scenebase.Scene):
             self.player.velocity.x = 0
 
     def update(self, dt):
+        self.background.update(dt)
         # Updates and handles player status and all entities movement
         self.player.update(dt)
         for g in self.groups:
@@ -119,3 +138,4 @@ class GameScene(scenebase.Scene):
         self.background.draw(screen)
         for g in self.groups:
             g.draw(screen)
+        self.player_group.draw(screen)

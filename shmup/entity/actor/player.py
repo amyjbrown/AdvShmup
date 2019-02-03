@@ -21,6 +21,7 @@ class Player(actor.Actor):
     HITBOX = pg.Rect(9, 6, 46, 52)
     RECT = pg.Rect(0, 0, 64, 64)
     MAX_HEALTH = 100
+    speed = 120
 
     def __init__(self, position, *groups):
         super().__init__(position, *groups)
@@ -28,6 +29,24 @@ class Player(actor.Actor):
 
     def update(self, dt):
         self._move(dt)
+
+    @property
+    def vx(self):
+        """Value of x component of velocity"""
+        return self.velocity.x
+
+    @vx.setter
+    def vx(self, x):
+        self.velocity.x = x
+
+    @property
+    def vy(self):
+        """Value of y component of velocity"""
+        return self.velocity.y
+
+    @vy.setter
+    def vy(self, y):
+        self.velocity.y = y
 
     @classmethod
     def setup(cls, observer):

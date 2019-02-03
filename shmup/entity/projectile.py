@@ -21,13 +21,15 @@ class Bullet(pg.sprite.Sprite):
     init_flag = False
     OBSERVER = None
     IMAGE = None
+    IMAGE_PATH = "../assets/player bullet.bmp"
     RECT = pg.Rect(0, 0, 16, 16)
     SPEED = -120  # Pixels per Second
-    DEFAULT_GROUPS = list()
     DAMAGE = 10
 
     def __init__(self, position):
-        super().__init__(*self.DEFAULT_GROUPS)
+        if not self.init_flag:
+            raise RuntimeError("Bullet class was not initialized")
+        super().__init__(self.OBSERVER.bullets)
         self.position = pg.Vector2(position)
         self.image = self.IMAGE
         self.rect = self.RECT.move(*position)
@@ -37,13 +39,17 @@ class Bullet(pg.sprite.Sprite):
     def setup(cls, observer):
         if not cls.init_flag:
             cls.OBSERVER = observer
-            cls.IMAGE = spritesheet.load("../assets/player bullet.bmp", True)
-            cls.DEFAULT_GROUPS = observer.bullets
+            cls.IMAGE = spritesheet.load(cls.IMAGE_PATH, True)
+            # cls.DEFAULT_GROUPS = observer.bullets
+            cls.init_flag = True
 
     def update(self, dt):
         dy = self.SPEED * dt
         self.position.y += dy
         self.rect.move_ip(0, dy)
+        # If bullet is out of space despawn
+        if not self.rect.colliderect(GAME_RECT):
+            self.kill()
 
     def collide(self, target):
         """Logic for enemy being hit"""

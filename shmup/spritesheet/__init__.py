@@ -9,7 +9,7 @@ Unless otherwise needed, use this for loading in sprites and images
 import sys
 import os
 import pygame as pg
-import spritesheet.spritesheet as spritesheet
+import shmup.spritesheet.spritesheet
 pg.init()
 
 # Locally creates cache

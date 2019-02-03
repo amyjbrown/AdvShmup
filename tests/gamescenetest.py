@@ -10,6 +10,8 @@ import pygame as pg
 from shmup.config import *
 import shmup.inputhandler as inputhandler
 import shmup.scene.gamescene as gamescene
+import shmup.entity.projectile as projectile
+
 
 # setup
 pg.init()
@@ -18,6 +20,8 @@ screen = pg.display.set_mode(GAME_AREA)
 
 Scene = gamescene.GameScene()
 Scene.load(reset=True)
+# Load and initialize projectile
+projectile.Bullet.setup(Scene)
 
 # gameloop
 game = True
