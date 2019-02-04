@@ -5,6 +5,7 @@ Player base object
 *Player
 """
 import shmup.entity.actor.actor as actor
+import shmup.entity.projectile as projectile
 from shmup.config import *
 
 
@@ -57,4 +58,5 @@ class Player(actor.Actor):
         return
 
     def fire(self):
-        pass
+        """Spawns an appropriate bullet object"""
+        projectile.Bullet((200, 200))

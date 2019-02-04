@@ -105,6 +105,9 @@ class GameScene(scenebase.Scene):
         else:
             self.player.velocity.x = 0
 
+        if inputhandler.poll_button("fire"):
+            self.player.fire()
+
     def update(self, dt):
         self.background.update(dt)
         # Updates and handles player status and all entities movement
