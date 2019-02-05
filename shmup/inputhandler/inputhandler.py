@@ -32,6 +32,7 @@ class EventHandler:
     """
 
     def __init__(self, key_map):
+        self.base_map = key_map
         self.buttons = [k for k in key_map]  # Note QUIT is a special type here
         self.key_map = dict()
         self.inputs = list()
@@ -84,6 +85,8 @@ class EventHandler:
         Returns:
             bool: True if Key is pressed down, False is key is up
         """
-        return self.key_pressed[button]
-
-
+        for b in self.base_map[button]:
+            if pg.key.get_pressed()[b]:
+                return True
+        else:
+            return False

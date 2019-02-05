@@ -2,6 +2,7 @@
 """
 Unit Test for Button Polling
 PASS
+input test 2: See if new method for polling works
 """
 # Import
 import pygame as pg
