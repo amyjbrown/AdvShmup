@@ -5,8 +5,6 @@ Custom virtual joystick and hat options [EXPERIMENTAL]
 This module contains custom joystick and hat wrapper options. Note these do not need to map onto a real joystick, but
 instead provide the interface for interacting equivalently, along with the appropriate Factory Methods
 
-TODO: Implement all of this tbh
-
 *VJoy: Virtual custom Joystick
 *VAxis: Virtual custom 1-dimensional axis
 *VHat: Virtual hat object

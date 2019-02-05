@@ -28,7 +28,6 @@ class EventHandler:
         buttons (list[str]): List of custom user Event types that this object produces
         inputs (list[pg.event]): List of pygame events that map to user events
         key_map (dict[pg.event, str]): Dictionary of pygame events to custom event codes
-        Todo: add the inverse of key_map, custom events -> list<pg.event>
     """
 
     def __init__(self, key_map):

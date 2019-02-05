@@ -27,7 +27,6 @@ class Player(actor.Actor):
 
     def __init__(self, position):
         super().__init__(position, self.observer.player_group)
-        # todo every other deal in this thing
         self.fire_side = False
         self.is_firing = False
         self.fire_timer = 0

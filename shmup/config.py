@@ -12,7 +12,7 @@ Attributes:
 """
 import pygame as pg
 
-GAME_AREA = (480, 640)  # TODO change all assets over to 480x640
+GAME_AREA = (480, 640)
 GAME_RECT = pg.Rect(0, 0, 480, 640)
 EXTENDED_RECT = pg.Rect(-64, -64, 608, 768)
 FPS = 60

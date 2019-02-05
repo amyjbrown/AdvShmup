@@ -4,12 +4,10 @@ High level entity control and management
 
 *EntityHandler: Handler component for entities to be used in a scene
 *hitbox_check: callback function for custom Actor type's hitboxes
-TODO: Fully Implement EntityHandler
 """
 import pygame as pg
 
 
-# TODO move this collision function elsewhere
 def hit_collide(a, b):
     """
     Check if two sprites hitboxes are interacting
@@ -58,13 +56,11 @@ class EntityHandler:
 
     def setup(self):
         # Performs setup
-        # TODO: Implement
         pass
 
     def update(self, dt):
         """
         Update all entities
-        TODO: IMPLEMENT
 
         Args:
             dt (float): Time update
@@ -87,7 +83,7 @@ class EntityHandler:
             token.effect(self.player)
 
         for colissions in pg.sprite.spritecollide(self.player, self.powerups, dokill=False, collided=hit_collide):
-            pass  # TODO the collisions detection bit
+            pass  #
 
 
     def draw(self, screen):

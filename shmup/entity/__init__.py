@@ -3,10 +3,9 @@ Container and reference for all actors and entities
 *hitbox collision function
 *Player type alias
 *Lists each of Enemy, Token, and Projectile types for setup and spawning purposes
-todo load in and finish enemies
-todo executive decisions: Drop entityhandler and use Scene as Observer?
 """
 import shmup.entity.actor.player as player
+import shmup.entity.projectile as projectile
 
 # Type aliases
 Player = player.Player
@@ -15,7 +14,8 @@ Enemy = list()
 
 Powerup = list()
 
-Projectiles = list()
+Projectiles = [projectile.Bullet
+               ]
 
 Explosion = list()
 
@@ -55,7 +55,7 @@ def setup(observer):
         powerup.setup(observer)
 
     for projectile in Projectiles:
-        projectile.setupC(observer)
+        projectile.setup(observer)
 
     for exp in Explosion:
         exp.setup(observer)

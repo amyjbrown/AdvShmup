@@ -2,12 +2,12 @@
 """
 Gamescene
 Where almost everything lives and works
-TODO: Move all entity handler code into here
 """
 import shmup.background as background
 import shmup.entity as entity
 import shmup.inputhandler as inputhandler
 import shmup.scene.scenebase as scenebase
+import shmup.entity
 from shmup.config import *
 
 inputhandler.setup(DEBUG_MAP)
@@ -57,11 +57,7 @@ class GameScene(scenebase.Scene):
             None
         """
         if reset:
-            # Do all enetity setup
-            entity.Player.setup(self)
-
-            for enemy in entity.Enemy:
-                enemy.setup(self)
+            entity.setup(self)
 
             self.player = entity.Player((100, 100))
 
@@ -70,7 +66,7 @@ class GameScene(scenebase.Scene):
     def handle_input(self, event):
         """
         Takes an input and appropriate updates the game
-        TODO decouple from inputhandler
+        Has now been fully decoupled
         """
         # general exit or other thing keys
         if event.key == "menu":
