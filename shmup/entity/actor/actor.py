@@ -3,7 +3,7 @@
 Contains abstract base for Actor class
 """
 import pygame as pg
-
+import shmup.spritesheet
 
 class Actor(pg.sprite.Sprite):
     """
@@ -50,6 +50,7 @@ class Actor(pg.sprite.Sprite):
         pg.Error: Haven't setup
     """
     # Statics
+    observer = None
     IMAGE_PATH = str()
     IMAGE = None
     init_flag = False
@@ -80,7 +81,7 @@ class Actor(pg.sprite.Sprite):
             None
         """
         if not cls.init_flag:
-            cls.IMAGE = pg.image.load(cls.IMAGE_PATH).convert()
+            cls.IMAGE = shmup.spritesheet.load(cls.IMAGE_PATH, True)
             cls.init_flag = True
             cls.observer = observer
         return
@@ -104,11 +105,11 @@ class Actor(pg.sprite.Sprite):
         """Basic movement update code"""
         dr = dt * self.velocity
         self.position += dr
-        self.rect.move_ip(*dr)
-        self.hitbox.move_ip(*dr)
+        self.rect.topleft = (*self.position,)
+        self.hitbox.topleft = (*self.position,)
         pass
 
-    def collide(self, other, dt):
+    def collide(self, other, ):
         """
         Script when colliding with other entity
 
@@ -119,7 +120,6 @@ class Actor(pg.sprite.Sprite):
         Returns:
             None
         """
-        pass
 
     def on_death(self):
         """

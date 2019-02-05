@@ -68,6 +68,11 @@ class Missile(Bullet):
     def setup(cls, observer):
         pass  # Need to properly setup things for it
 
+    def collide(self, target):
+        """Spawns an AOE explosion effect"""
+        target.health -= self.DAMAGE
+        pass
+
 
 class Zap(Bullet):
     """

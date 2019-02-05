@@ -6,11 +6,16 @@ Container and reference for all actors and entities
 """
 import shmup.entity.actor.player as player
 import shmup.entity.projectile as projectile
+import shmup.entity.actor.asteroid as asteroid
+
+# import shmup.entity.powerup as powerup
 
 # Type aliases
 Player = player.Player
-
-Enemy = list()
+Bullet = projectile.Bullet
+Asteroid = asteroid.Asteroid
+# Setup loops
+Enemy = [asteroid.Asteroid]
 
 Powerup = list()
 
@@ -31,7 +36,7 @@ def hit_collide(a, b):
     Returns:
         True is hitboxes are colliding, Fale otherwise
     """
-    if a.hitbox.collide(b.hitbox):
+    if a.hitbox.colliderect(b.hitbox):
         return True
     return False
 

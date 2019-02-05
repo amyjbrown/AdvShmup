@@ -137,41 +137,6 @@ class GameScene(scenebase.Scene):
             else:
                 self.player.firing(False)
 
-
-
-
-        # movement handling
-
-        #        elif event.key == "down":
-        #            # If player is not moving, set players downward velocity
-        #            if event.down and (self.player.vy == 0.0):
-        #                self.player.vy = self.player.speed
-        #            # If player is moving upwards, pressing down will cancel it out
-        #            elif event.down and self.player.vy > 0.0:
-        #                self.player.vy = 0
-        #            # If player is moving down and lets go of the down key, player will stop moving
-        #            elif event.up and self.player.vy > 0.0:
-        #                self.player.speed = 0
-        #            elif event.up and self.player.vy == 0.0:
-        #                self.player.vy = -self.player.speed
-
-    #        if inputhandler.poll_button("up") and not inputhandler.poll_button("down"):
-    #            self.player.velocity.y = self.player.speed * -1
-    #        elif inputhandler.poll_button("down") and not inputhandler.poll_button("up"):
-    #            self.player.velocity.y = self.player.speed * 1
-    #        else:
-    #            self.player.velocity.y = 0
-    #
-    #        if inputhandler.poll_button("left") and not inputhandler.poll_button("right"):
-    #            self.player.velocity.x = self.player.speed * -1
-    #        elif inputhandler.poll_button("right") and not inputhandler.poll_button("left"):
-    #            self.player.velocity.x = self.player.speed * 1
-    #        else:
-    #            self.player.velocity.x = 0
-    #
-    #        if inputhandler.poll_button("fire"):
-    #            self.player.fire()
-
     def update(self, dt):
         self.background.update(dt)
         # Updates and handles player status and all entities movement
@@ -192,10 +157,11 @@ class GameScene(scenebase.Scene):
                                              dokill=False, collided=entity.hit_collide):
             token.effect(self.player)
 
-        for bullet, enemy in pg.sprite.groupcollide(self.bullets, self.enemy,
-                                                    dokilla=False, dokillb=False,
-                                                    collided=entity.hit_collide).items():
-            bullet.collide(enemy)
+        for bullet, enemy_list in pg.sprite.groupcollide(self.bullets, self.enemy,
+                                                         dokilla=True, dokillb=False,
+                                                         collided=entity.hit_collide).items():
+            for enemy in enemy_list:
+                bullet.collide(enemy)
 
         # if the player is at zero health, do appropriate transition
         if self.player.health <= 0:

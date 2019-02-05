@@ -1,17 +1,17 @@
 """
 Main application file
 Run this script to play the game
-TODO relative path towards the assets folder
 """
 # imports
 import pygame as pg
 from shmup.config import *
 import shmup.inputhandler as inputhandler
 import shmup.scene.gamescene
+import shmup.entity
 
 pg.init()
 screen = pg.display.set_mode(GAME_AREA)
-inputhandler.setup(KEY_MAP)
+inputhandler.setup(DEBUG_MAP)
 mainscene = shmup.scene.gamescene.GameScene()
 
 mainscene.load(reset=True)

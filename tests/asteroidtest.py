@@ -1,6 +1,6 @@
 # encoding * utf-8 *
 """
-Testing Topic Goes Here
+Testing Asteroid Hazard
 """
 # imports
 import pygame as pg
@@ -16,14 +16,22 @@ mainscene = shmup.scene.gamescene.GameScene()
 
 mainscene.load(reset=True)
 
+print(shmup.entity == shmup.scene.gamescene.entity)
+
 playing = True
 clock = pg.time.Clock()
+shmup.entity.Asteroid(50, 50)
 while playing:
+    # for i in mainscene.enemy:
+    #    print(i.position)
     dt = clock.tick(FPS) / 1000
     for event in inputhandler.get():
+        if event.key == "debug1" and event.down:
+            shmup.entity.Asteroid(50, 50)
         mainscene.handle_input(event)
         if mainscene.final:
             playing = False
     mainscene.update(dt)
     mainscene.draw(screen)
+    pg.display.set_caption(str(mainscene.player.health))
     pg.display.flip()
