@@ -23,7 +23,7 @@ class Bullet(pg.sprite.Sprite):
     IMAGE = None
     IMAGE_PATH = "../assets/player bullet.bmp"
     RECT = pg.Rect(0, 0, 16, 16)
-    SPEED = -120  # Pixels per Second
+    SPEED = -150  # Pixels per Second
     DAMAGE = 10
 
     def __init__(self, x, y):
@@ -33,7 +33,6 @@ class Bullet(pg.sprite.Sprite):
         self.position = pg.Vector2(x, y)
         self.image = self.IMAGE
         self.rect = self.RECT.move(x, y)
-
         self.hitbox = self.rect
 
     @classmethod

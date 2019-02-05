@@ -4,7 +4,6 @@ Game Scene logic
 Testing to see if Game Scene runs
 Goals: gamescene should be constructed and load() called
 Gamescene should have a simple moving player object, a scrolling background, and quits upon hitting `ESC` or quitting
-
 """
 import pygame as pg
 from shmup.config import *

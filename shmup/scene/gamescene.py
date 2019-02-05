@@ -68,13 +68,81 @@ class GameScene(scenebase.Scene):
             self.background = background.BackGround("../assets/BG1.bmp", FPS)
 
     def handle_input(self, event):
+        """
+        Takes an input and appropriate updates the game
+        TODO decouple from inputhandler
+        """
+        # general exit or other thing keys
         if event.key == "menu":
             self.final = True
         elif event.key == "QUIT":
             self.final = True
-        elif event.key == "debug1" and event.down:
-            print("Player velcoity: ",
-                  self.player.vx, self.player.vy)
+
+        # Movement keys and handling
+        elif event.key == "up" and event.down:
+            if self.player.vy == 0:
+                self.player.vy = -self.player.speed
+                return
+            elif self.player.vy > 0:  # player is holding down, shift to going up
+                self.player.vy = 0
+                return
+
+        elif event.key == "up" and event.up:
+            if self.player.vy == 0:
+                self.player.vy = self.player.speed
+            elif self.player.vy < 0:
+                self.player.vy = 0
+
+        elif event.key == "down" and event.down:
+            if self.player.vy == 0:
+                self.player.vy = self.player.speed
+                return
+            elif self.player.vy < 0:  # player is holding up, shift to going down
+                self.player.vy = 0
+                return
+
+        elif event.key == "down" and event.up:
+            if self.player.vy == 0:
+                self.player.vy = - self.player.speed
+            elif self.player.vy > 0:
+                self.player.vy = 0
+
+        elif event.key == "right" and event.down:
+            if self.player.vx == 0:
+                self.player.vx = self.player.speed
+                return
+            elif self.player.vx < 0:  # player is holding down, shift to going up
+                self.player.vx = 0
+                return
+
+        elif event.key == "right" and event.up:
+            if self.player.vx == 0:
+                self.player.vx = - self.player.speed
+            elif self.player.vx > 0:
+                self.player.vx = 0
+
+        elif event.key == "left" and event.down:
+            if self.player.vx == 0:
+                self.player.vx = - self.player.speed
+                return
+            elif self.player.vx > 0:  # player is holding down, shift to going up
+                self.player.vx = 0
+                return
+
+        elif event.key == "left" and event.up:
+            if self.player.vx == 0:
+                self.player.vx = self.player.speed
+            elif self.player.vx < 0:
+                self.player.vx = 0
+
+        elif event.key == "fire":
+            if event.down:
+                self.player.firing()
+            else:
+                self.player.firing(False)
+
+
+
 
         # movement handling
 
@@ -91,22 +159,22 @@ class GameScene(scenebase.Scene):
         #            elif event.up and self.player.vy == 0.0:
         #                self.player.vy = -self.player.speed
 
-        if inputhandler.poll_button("up") and not inputhandler.poll_button("down"):
-            self.player.velocity.y = self.player.speed * -1
-        elif inputhandler.poll_button("down") and not inputhandler.poll_button("up"):
-            self.player.velocity.y = self.player.speed * 1
-        else:
-            self.player.velocity.y = 0
-
-        if inputhandler.poll_button("left") and not inputhandler.poll_button("right"):
-            self.player.velocity.x = self.player.speed * -1
-        elif inputhandler.poll_button("right") and not inputhandler.poll_button("left"):
-            self.player.velocity.x = self.player.speed * 1
-        else:
-            self.player.velocity.x = 0
-
-        if inputhandler.poll_button("fire"):
-            self.player.fire()
+    #        if inputhandler.poll_button("up") and not inputhandler.poll_button("down"):
+    #            self.player.velocity.y = self.player.speed * -1
+    #        elif inputhandler.poll_button("down") and not inputhandler.poll_button("up"):
+    #            self.player.velocity.y = self.player.speed * 1
+    #        else:
+    #            self.player.velocity.y = 0
+    #
+    #        if inputhandler.poll_button("left") and not inputhandler.poll_button("right"):
+    #            self.player.velocity.x = self.player.speed * -1
+    #        elif inputhandler.poll_button("right") and not inputhandler.poll_button("left"):
+    #            self.player.velocity.x = self.player.speed * 1
+    #        else:
+    #            self.player.velocity.x = 0
+    #
+    #        if inputhandler.poll_button("fire"):
+    #            self.player.fire()
 
     def update(self, dt):
         self.background.update(dt)
