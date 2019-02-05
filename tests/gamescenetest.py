@@ -29,8 +29,6 @@ clock = pg.time.Clock()
 while game:
     dt = clock.tick(FPS) / 1000
     for event in inputhandler.get():
-        if event.key == "debug1":
-            projectile.Bullet((200, 200))
         Scene.handle_input(event)
         if Scene.final:
             game = False

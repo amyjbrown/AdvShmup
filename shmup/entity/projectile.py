@@ -26,13 +26,14 @@ class Bullet(pg.sprite.Sprite):
     SPEED = -120  # Pixels per Second
     DAMAGE = 10
 
-    def __init__(self, position):
+    def __init__(self, x, y):
         if not self.init_flag:
             raise RuntimeError("Bullet class was not initialized")
         super().__init__(self.OBSERVER.bullets)
-        self.position = pg.Vector2(position)
+        self.position = pg.Vector2(x, y)
         self.image = self.IMAGE
-        self.rect = self.RECT.move(*position)
+        self.rect = self.RECT.move(x, y)
+
         self.hitbox = self.rect
 
     @classmethod

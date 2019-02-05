@@ -24,9 +24,10 @@ class Player(actor.Actor):
     MAX_HEALTH = 100
     speed = 120
 
-    def __init__(self, position, *groups):
-        super().__init__(position, *groups)
+    def __init__(self, position):
+        super().__init__(position, self.observer.player_group)
         # todo every other deal in this thing
+        self.fire_side = False
 
     def update(self, dt):
         self._move(dt)
@@ -59,4 +60,6 @@ class Player(actor.Actor):
 
     def fire(self):
         """Spawns an appropriate bullet object"""
-        projectile.Bullet((200, 200))
+        projectile.Bullet(self.position.x + 20 + 8 * self.fire_side,
+                          self.position.y - 5)
+        self.fire_side = not self.fire_side

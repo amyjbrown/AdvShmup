@@ -63,7 +63,7 @@ class GameScene(scenebase.Scene):
             for enemy in entity.Enemy:
                 enemy.setup(self)
 
-            self.player = entity.Player((100, 100), self.player_group)
+            self.player = entity.Player((100, 100))
 
             self.background = background.BackGround("../assets/BG1.bmp", FPS)
 
