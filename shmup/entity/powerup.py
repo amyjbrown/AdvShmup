@@ -44,9 +44,10 @@ class Health(pg.sprite.Sprite):
             cls.init_flag = True
 
     def update(self, dt):
-        dy = self.SPEED * dt
+        dy = dt * self.SPEED
         self.position.y += dy
-        self.rect.y = dy
+        self.rect.y = self.position.y
+        # print(self.SPEED, self.position, self.rect)
         # If bullet is out of space despawn
         if not self.rect.colliderect(GAME_RECT):
             self.kill()
@@ -54,7 +55,7 @@ class Health(pg.sprite.Sprite):
     def effect(self, target):
         """Logic for enemy being hit"""
         if target.health + self.HEAL >= 100:
-            ds = int(100 - (target.health + self.HEAL)) * 3
+            ds = int((target.health + self.HEAL) - 100) * 2
             self.OBSERVER.add_score(ds, False)
             target.health = 100
         else:
