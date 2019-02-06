@@ -1,22 +1,20 @@
 # encoding * utf-8 *
 """
-{Module being tested}
-{Behavior being tested}
-PASS? <TimeStamp>
+text.py test
+testing to see if I can actually post fonts in
 
 Notes:
-    Notes go here
+    Want this for general purpose text drawing
 """
 import pygame as pg
 from shmup.config import *
 import shmup.inputhandler as inputhandler
-
+import shmup.text as text
 
 # initialization
 pg.init()
 inputhandler.setup(DEBUG_MAP)
 screen = pg.display.set_mode(GAME_AREA)
-
 
 # Items to be tested go here
 
@@ -33,5 +31,9 @@ while game:
             pass
         # per event code
     # per loop code
+    text.draw(screen,
+              "Hello World!",
+              GREEN,
+              (20, 20),
+              size=30)
     pg.display.flip()
-

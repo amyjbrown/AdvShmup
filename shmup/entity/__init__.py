@@ -7,6 +7,7 @@ Container and reference for all actors and entities
 import shmup.entity.actor.player as player
 import shmup.entity.projectile as projectile
 import shmup.entity.actor.asteroid as asteroid
+import shmup.entity.powerup as powerup
 
 # import shmup.entity.powerup as powerup
 
@@ -14,12 +15,13 @@ import shmup.entity.actor.asteroid as asteroid
 Player = player.Player
 Bullet = projectile.Bullet
 Asteroid = asteroid.Asteroid
+HealthToken = powerup.Health
 # Setup loops
-Enemy = [asteroid.Asteroid]
+Enemy = [Asteroid]
 
-Powerup = list()
+Powerup = [HealthToken]
 
-Projectiles = [projectile.Bullet
+Projectiles = [Bullet
                ]
 
 Explosion = list()

@@ -9,12 +9,16 @@ import shmup.inputhandler as inputhandler
 import shmup.scene.gamescene
 import shmup.entity
 
+import shmup.gui.textgui
+
 pg.init()
 screen = pg.display.set_mode(GAME_AREA)
 inputhandler.setup(DEBUG_MAP)
 mainscene = shmup.scene.gamescene.GameScene()
 
 mainscene.load(reset=True)
+HUD = shmup.gui.textgui.TextGUI(mainscene)
+
 
 print(shmup.entity == shmup.scene.gamescene.entity)
 
@@ -28,10 +32,14 @@ while playing:
     for event in inputhandler.get():
         if event.key == "debug1" and event.down:
             shmup.entity.Asteroid(50, 50)
+        elif event.key == "debug2" and event.down:
+            shmup.entity.HealthToken(200, 0)
+            pass
         mainscene.handle_input(event)
         if mainscene.final:
             playing = False
     mainscene.update(dt)
     mainscene.draw(screen)
-    pg.display.set_caption(str(mainscene.player.health))
+    # pg.display.set_caption(str(mainscene.player.health))
+    HUD.draw(screen, dt)
     pg.display.flip()
