@@ -11,7 +11,7 @@ from shmup.config import *
 # setup
 pg.init()
 inputhandler.setup(DEBUG_MAP)
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 
 Player = player.Player
 Player.setup(None)  # None is fine since you do no operations on it

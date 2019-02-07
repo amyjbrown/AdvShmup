@@ -14,7 +14,7 @@ import shmup.text as text
 # initialization
 pg.init()
 inputhandler.setup(DEBUG_MAP)
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 
 # Items to be tested go here
 

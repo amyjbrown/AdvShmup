@@ -1,5 +1,5 @@
 """
-Powerup
+Powerups
 Contains tokens that can be picked up
 *Health Pack
 *Score Items
@@ -19,8 +19,6 @@ class Health(pg.sprite.Sprite):
     Use as prototype for other powerups
     """
     init_flag = False
-    OBSERVER = None
-    IMAGE = None
     IMAGE_PATH = "../assets/Health Token.bmp"
     RECT = pg.Rect(0, 0, 32, 32)
     SPEED = 150  # Pixels per Second
@@ -60,4 +58,32 @@ class Health(pg.sprite.Sprite):
             target.health = 100
         else:
             target.health += self.HEAL
+        self.kill()
+
+
+class HighPoint(Health):
+    """
+    Highscore object
+
+    Adds Score to game
+    """
+    IMAGE_PATH = "../assets/gold.bmp"
+    RECT = pg.Rect(0, 0, 24, 32)
+    VALUE = 750
+
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        return
+
+    def effect(self, target):
+        """
+        Adds Value to Score
+
+        Args:
+            target (Actor): Placeholder value
+
+        Returns:
+            None
+        """
+        self.OBSERVER.add_score(self.VALUE, False)
         self.kill()

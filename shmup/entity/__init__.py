@@ -16,15 +16,16 @@ Player = player.Player
 Bullet = projectile.Bullet
 Asteroid = asteroid.Asteroid
 HealthToken = powerup.Health
+HighPointToken = powerup.HighPoint
 # Setup loops
 Enemy = [Asteroid]
 
-Powerup = [HealthToken]
+Powerups = [HealthToken, HighPointToken]
 
 Projectiles = [Bullet
                ]
 
-Explosion = list()
+Particles = []
 
 
 def hit_collide(a, b):
@@ -58,11 +59,11 @@ def setup(observer):
     for enemy in Enemy:
         enemy.setup(observer)
 
-    for powerup in Powerup:
+    for powerup in Powerups:
         powerup.setup(observer)
 
     for projectile in Projectiles:
         projectile.setup(observer)
 
-    for exp in Explosion:
-        exp.setup(observer)
+    for p in Particles:
+        p.setup(observer)

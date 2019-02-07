@@ -12,19 +12,21 @@ import shmup.entity
 import shmup.gui.textgui
 
 pg.init()
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 inputhandler.setup(DEBUG_MAP)
 mainscene = shmup.scene.gamescene.GameScene()
+
+shmup.entity.HighPointToken.setup(mainscene)
 
 mainscene.load(reset=True)
 HUD = shmup.gui.textgui.TextGUI(mainscene)
 
 
-print(shmup.entity == shmup.scene.gamescene.entity)
-
 playing = True
 clock = pg.time.Clock()
-shmup.entity.Asteroid(50, 50)
+# shmup.entity.Asteroid(50, 50)
+a = shmup.entity.HighPointToken(50, 50)
+print(a.image, a.rect, a.IMAGE)
 while playing:
     # for i in mainscene.enemy:
     #    print(i.position)
@@ -34,7 +36,8 @@ while playing:
             shmup.entity.Asteroid(50, 50)
         elif event.key == "debug2" and event.down:
             shmup.entity.HealthToken(200, 0)
-            pass
+        elif event.key == "debug3" and event.down:
+            shmup.entity.HighPointToken(200, 0)
         mainscene.handle_input(event)
         if mainscene.final:
             playing = False

@@ -9,7 +9,7 @@ import shmup.inputhandler as inputhandler
 # setup
 pg.init()
 inputhandler.setup(DEBUG_MAP)
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 
 # gameloop
 game = True

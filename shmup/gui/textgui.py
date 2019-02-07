@@ -3,9 +3,8 @@ Text Gui for drawing simple information
 
 """
 import pygame as pg
-
-pg.init()
 from shmup.config import *
+pg.init()
 
 
 class TextGUI:

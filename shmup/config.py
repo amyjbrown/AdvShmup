@@ -3,16 +3,31 @@
 Global Constants and other useful info for initialization
 
 Attributes:
-    GAME_AREA (list<int>): total size of the game area and Screen space
+    RESOLUTION (list<int>): total size of the game area and Screen space
     GAME_RECT (pg.Rect): Total Rect of playable screenspace
-    EXTENDEND_RECT (pg.Rect): Extended Rect used for enemy despawning
+    EXTENDED_RECT (pg.Rect): Extended Rect used for enemy despawning
     KEYS (list<str>): List of ingame Keys
     KEY_MAP (dict<str, pg.event>): default key mapping
     DEBUG_MAP (dict<str, pg.event>): Extended key mappings for debug mode and testing
 """
 import pygame as pg
 
-GAME_AREA = (480, 640)
+RESOLUTION = (480, 640)
+
+CENTER = (480 / 2, 640 / 2)
+
+CENTER_TOP = (480 / 2, 640 / 3)
+CENTER_BOTTOM = (480, 640 * 2 / 3)
+
+CENTER_RIGHT = (480 * 1 / 3, 640 / 2)
+CENTER_LEFT = (480 * 2 / 3, 640 / 2)
+
+CENTER_TOP_RIGHT = (480 * 1 / 3, 640 * 1 / 3)
+CENTER_TOP_LEFT = (480 * 2 / 3, 640 * 1 / 3)
+CENTER_BOTTOM_LEFT = (480 * 1 / 3, 640 * 2 / 3)
+CENTER_BOTTOM_RIGHT = (480 * 2 / 3, 640 * 1 / 3)
+
+
 GAME_RECT = pg.Rect(0, 0, 480, 640)
 EXTENDED_RECT = pg.Rect(-64, -64, 608, 768)
 FPS = 60

@@ -1,6 +1,6 @@
+# encoding * utf-8 *
 """
-Main application file
-Run this script to play the game
+Testing Topic Goes Here
 """
 # imports
 import pygame as pg
@@ -13,6 +13,8 @@ pg.init()
 screen = pg.display.set_mode(RESOLUTION)
 inputhandler.setup(DEBUG_MAP)
 mainscene = shmup.scene.gamescene.GameScene()
+
+shmup.entity.HighPointToken.setup(mainscene)
 
 mainscene.load(reset=True)
 

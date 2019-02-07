@@ -11,7 +11,7 @@ import shmup.background as background
 
 pg.init()
 inputhandler.setup(DEBUG_MAP)
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 
 path = r"../assets/BG1.bmp"
 bg = background.BackGround(path, FPS)

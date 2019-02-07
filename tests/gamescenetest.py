@@ -15,7 +15,7 @@ import shmup.entity.projectile as projectile
 # setup
 pg.init()
 inputhandler.setup(DEBUG_MAP)
-screen = pg.display.set_mode(GAME_AREA)
+screen = pg.display.set_mode(RESOLUTION)
 
 Scene = gamescene.GameScene()
 Scene.load(reset=True)
