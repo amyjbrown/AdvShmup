@@ -35,7 +35,9 @@ class TextGUI:
         hp_text = "HEALTH {:03} | 100".format(self.scene.player.health)
         lives_text = "LIVES {:02}".format(self.scene.lives)
         score_text = "SCORE {:06}".format(self.scene.score)
-        fps_text = "{:02.2f} fps".format(1 / dt)
+        fps_text = "FPS {:02.2f}".format(1 / dt)
+        respawn_text = "Time to Revive {:02.2f}".format(self.scene.respawn_timer)
+        position_text = "Player <{:03.2f}, {:03.2f}>".format(*self.scene.player.position)
 
         screen.blit(
             self.font.render(hp_text, True, GREEN),
@@ -53,3 +55,12 @@ class TextGUI:
             self.font.render(fps_text, True, RED),
             (4, 62)
         )
+        screen.blit(
+            self.font.render(position_text, True, BLUE),
+            (4, 80)
+        )
+        if not self.scene.player.alive():
+            screen.blit(
+                self.font.render(respawn_text, True, CYAN),
+                (4, 96)
+            )

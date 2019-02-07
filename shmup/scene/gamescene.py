@@ -2,6 +2,7 @@
 """
 Gamescene
 Where almost everything lives and works
+TODO: Why player will not start moving left if player is firing and moving up-right
 """
 import shmup.background as background
 import shmup.entity as entity
@@ -23,7 +24,7 @@ class GameScene(scenebase.Scene):
         self.level = None
         self.level_data = None  # This is where level data will live
         self.score = 0
-        self.lives = 2
+        self.lives = 0
 
         self.background = None
 
@@ -77,64 +78,72 @@ class GameScene(scenebase.Scene):
         elif event.key == "QUIT":
             self.final = True
 
+        if not self.player.alive():
+            return
+
         # Movement keys and handling
-        elif event.key == "up" and event.down:
+        if event.key == "up" and event.down:
             if self.player.vy == 0:
                 self.player.vy = -self.player.speed
                 return
             elif self.player.vy > 0:  # player is holding down, shift to going up
                 self.player.vy = 0
                 return
-
         elif event.key == "up" and event.up:
             if self.player.vy == 0:
                 self.player.vy = self.player.speed
+                return
             elif self.player.vy < 0:
                 self.player.vy = 0
+                return
 
-        elif event.key == "down" and event.down:
+        if event.key == "down" and event.down:
             if self.player.vy == 0:
                 self.player.vy = self.player.speed
                 return
             elif self.player.vy < 0:  # player is holding up, shift to going down
                 self.player.vy = 0
                 return
-
         elif event.key == "down" and event.up:
             if self.player.vy == 0:
                 self.player.vy = - self.player.speed
+                return
             elif self.player.vy > 0:
                 self.player.vy = 0
+                return
 
-        elif event.key == "right" and event.down:
+        if event.key == "right" and event.down:
             if self.player.vx == 0:
                 self.player.vx = self.player.speed
                 return
             elif self.player.vx < 0:  # player is holding down, shift to going up
                 self.player.vx = 0
                 return
-
         elif event.key == "right" and event.up:
             if self.player.vx == 0:
                 self.player.vx = - self.player.speed
+                return
             elif self.player.vx > 0:
                 self.player.vx = 0
+                return
 
-        elif event.key == "left" and event.down:
+        if event.key == "left" and event.down:
             if self.player.vx == 0:
                 self.player.vx = - self.player.speed
                 return
             elif self.player.vx > 0:  # player is holding down, shift to going up
                 self.player.vx = 0
                 return
-
         elif event.key == "left" and event.up:
             if self.player.vx == 0:
                 self.player.vx = self.player.speed
+                return
             elif self.player.vx < 0:
                 self.player.vx = 0
+                return
 
-        elif event.key == "fire":
+        # Player combat Events
+        if event.key == "fire":
             if event.down:
                 self.player.firing()
             else:
@@ -145,6 +154,9 @@ class GameScene(scenebase.Scene):
         if not self.player.alive():
             self.respawn_timer -= dt
             if self.respawn_timer <= 0:
+                # Reset player to center
+                self.player.position = pg.Vector2(208, 394.66666666666663)
+                self.player.velocity = pg.Vector2(0, 0)
                 self.player_group.add(self.player)
 
         self.background.update(dt)
@@ -175,15 +187,16 @@ class GameScene(scenebase.Scene):
 
         # if the player is at zero health, do appropriate transition
         if self.player.health <= 0:
+            self.player.kill()  # Stops player rendering
             if self.lives == 0:
                 self.final = True
                 return
-            # Stop playing rendering
-            self.player.kill()  # Stops player rendering
-            self.respawn_timer = 3.01
-            self.lives -= 1
-            # Reset player
-            self.player.health = self.player.MAX_HEALTH
+            else:
+                # If player still has respawns, let the player keep going
+                self.respawn_timer = 3.0
+                self.lives -= 1
+                # Reset player
+                self.player.health = self.player.MAX_HEALTH
 
     def draw(self, screen):
         self.background.draw(screen)

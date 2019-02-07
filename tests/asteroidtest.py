@@ -38,7 +38,11 @@ while playing:
         mainscene.handle_input(event)
         if mainscene.final:
             playing = False
+            break
     mainscene.update(dt)
+    if mainscene.final:
+        playing = False
+        break
     mainscene.draw(screen)
     # pg.display.set_caption(str(mainscene.player.health))
     HUD.draw(screen, dt)
