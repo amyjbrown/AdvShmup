@@ -23,7 +23,7 @@ class GameScene(scenebase.Scene):
         self.level = None
         self.level_data = None  # This is where level data will live
         self.score = 0
-        self.lives = 3
+        self.lives = 2
 
         self.background = None
 
@@ -39,7 +39,10 @@ class GameScene(scenebase.Scene):
         # Internal handling
         self.groups = [self.effects, self.enemy, self.enemy_bullets, self.bullets, self.powerups]
 
+        # Internal timers and others
         self.game_progress = 0.0
+        self.respawn_timer = 0
+        self.player_alive = True
 
     def add_score(self, score, combo=False):
         """Adds any scored points to score"""
@@ -138,34 +141,49 @@ class GameScene(scenebase.Scene):
                 self.player.firing(False)
 
     def update(self, dt):
+        # Check if player is respawning, if True, respawn player
+        if not self.player.alive():
+            self.respawn_timer -= dt
+            if self.respawn_timer <= 0:
+                self.player_group.add(self.player)
+
         self.background.update(dt)
         # Updates and handles player status and all entities movement
         self.player.update(dt)
         for g in self.groups:
             g.update(dt)
 
-        # Do all collision detection
-        for enemy in pg.sprite.spritecollide(self.player, self.enemy, False,
-                                             collided=entity.hit_collide):
-            enemy.collide(self.player)
+        # Do player focused collision detection
+        if self.player.alive():
+            for enemy in pg.sprite.spritecollide(self.player, self.enemy, False,
+                                                 collided=entity.hit_collide):
+                enemy.collide(self.player)
 
-        for bullet in pg.sprite.spritecollide(self.player, self.enemy_bullets,
-                                              dokill=True, collided=entity.hit_collide):
-            bullet.collide(self.player)
+            for bullet in pg.sprite.spritecollide(self.player, self.enemy_bullets,
+                                                  dokill=True, collided=entity.hit_collide):
+                bullet.collide(self.player)
 
-        for token in pg.sprite.spritecollide(self.player, self.powerups,
-                                             dokill=False, collided=entity.hit_collide):
-            token.effect(self.player)
+            for token in pg.sprite.spritecollide(self.player, self.powerups,
+                                                 dokill=False, collided=entity.hit_collide):
+                token.effect(self.player)
 
-        for bullet, enemy_list in pg.sprite.groupcollide(self.bullets, self.enemy,
-                                                         dokilla=True, dokillb=False,
+        # Do the bullet -> enemy collision detection, which doesn't require the player
+        for bullet, enemy_list in pg.sprite.groupcollide(self.bullets, self.enemy, dokilla=True, dokillb=False,
                                                          collided=entity.hit_collide).items():
             for enemy in enemy_list:
                 bullet.collide(enemy)
 
         # if the player is at zero health, do appropriate transition
         if self.player.health <= 0:
-            self.final = True
+            if self.lives == 0:
+                self.final = True
+                return
+            # Stop playing rendering
+            self.player.kill()  # Stops player rendering
+            self.respawn_timer = 3.01
+            self.lives -= 1
+            # Reset player
+            self.player.health = self.player.MAX_HEALTH
 
     def draw(self, screen):
         self.background.draw(screen)
