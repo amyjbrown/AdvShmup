@@ -3,7 +3,7 @@ Powerups
 Contains tokens that can be picked up
 *Health Pack
 *Score Items
-*Missle Pack
+*Missile Pack
 *Bomb Pack
 """
 import pygame as pg

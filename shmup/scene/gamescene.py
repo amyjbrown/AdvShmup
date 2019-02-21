@@ -8,8 +8,8 @@ import shmup.background as background
 import shmup.entity as entity
 import shmup.inputhandler as inputhandler
 import shmup.scene.scenebase as scenebase
-import shmup.entity
 from shmup.config import *
+import shmup.level.level
 
 inputhandler.setup(DEBUG_MAP)
 
@@ -23,8 +23,9 @@ class GameScene(scenebase.Scene):
         # base game values
         self.level = None
         self.level_data = None  # This is where level data will live
+        self.encounters = shmup.level.level.InfiniteLevel(self)
         self.score = 0
-        self.lives = 0
+        self.lives = 2
 
         self.background = None
 
@@ -159,6 +160,9 @@ class GameScene(scenebase.Scene):
                 self.player.velocity = pg.Vector2(0, 0)
                 self.player_group.add(self.player)
 
+        if self.player.alive():
+            self.encounters.update(dt)
+
         self.background.update(dt)
         # Updates and handles player status and all entities movement
         self.player.update(dt)
@@ -188,6 +192,7 @@ class GameScene(scenebase.Scene):
         # if the player is at zero health, do appropriate transition
         if self.player.health <= 0:
             self.player.kill()  # Stops player rendering
+            self.player.is_firing = False
             if self.lives == 0:
                 self.final = True
                 return

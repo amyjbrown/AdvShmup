@@ -16,7 +16,7 @@ class Asteroid(actor.Actor):
     init_flag = False
     HITBOX = pg.Rect(8, 8, 46, 46)
     RECT = pg.Rect(0, 0, 64, 64)
-    MAX_HEALTH = 20
+    MAX_HEALTH = 50
     speed = 90
 
     def __init__(self, x, y):
@@ -27,6 +27,7 @@ class Asteroid(actor.Actor):
         self._move(dt)
         if self.health <= 0:
             self.kill()
+            self.observer.add_score(100)
         if not self.rect.colliderect(EXTENDED_RECT):
             self.kill()
 

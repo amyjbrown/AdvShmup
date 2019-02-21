@@ -8,7 +8,7 @@ from shmup.config import *
 import shmup.inputhandler as inputhandler
 import shmup.scene.gamescene
 import shmup.entity
-
+import shmup.level
 import shmup.gui.textgui
 
 pg.init()
@@ -25,8 +25,8 @@ HUD = shmup.gui.textgui.TextGUI(mainscene)
 playing = True
 clock = pg.time.Clock()
 # shmup.entity.Asteroid(50, 50)
-a = shmup.entity.HighPointToken(50, 50)
-print(a.image, a.rect, a.IMAGE)
+# a = shmup.entity.HighPointToken(50, 50)
+# print(a.image, a.rect, a.IMAGE)
 while playing:
     # for i in mainscene.enemy:
     #    print(i.position)
