@@ -10,10 +10,17 @@ Attributes:
     KEY_MAP (dict<str, pg.event>): default key mapping
     DEBUG_MAP (dict<str, pg.event>): Extended key mappings for debug mode and testing
 """
+import sys, os
 import pygame as pg
 
+# Pathing
+GLOBAL_PATH = os.path.abspath("..")
+# os.path.join(os.path.dirname(__file__), "..", "..")
+
+# Screen size and Resolution
 RESOLUTION = (480, 640)
 
+# Anchor Points
 CENTER = (480 / 2, 640 / 2)
 
 CENTER_TOP = (480 / 2, 640 / 3)
@@ -27,7 +34,7 @@ CENTER_TOP_LEFT = (480 * 2 / 3, 640 * 1 / 3)
 CENTER_BOTTOM_LEFT = (480 * 1 / 3, 640 * 2 / 3)
 CENTER_BOTTOM_RIGHT = (480 * 2 / 3, 640 * 1 / 3)
 
-
+#
 GAME_RECT = pg.Rect(0, 0, 480, 640)
 EXTENDED_RECT = pg.Rect(-64, -64, 608, 768)
 FPS = 60

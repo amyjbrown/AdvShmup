@@ -19,7 +19,7 @@ class Health(pg.sprite.Sprite):
     Use as prototype for other powerups
     """
     init_flag = False
-    IMAGE_PATH = "../assets/Health Token.bmp"
+    IMAGE_PATH = "Health Token.bmp"
     RECT = pg.Rect(0, 0, 32, 32)
     SPEED = 150  # Pixels per Second
     HEAL = 25
@@ -67,7 +67,7 @@ class HighPoint(Health):
 
     Adds Score to game
     """
-    IMAGE_PATH = "../assets/gold.bmp"
+    IMAGE_PATH = "gold.bmp"
     RECT = pg.Rect(0, 0, 24, 32)
     VALUE = 750
 

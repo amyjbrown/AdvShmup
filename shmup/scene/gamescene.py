@@ -4,6 +4,7 @@ Gamescene
 Where almost everything lives and works
 TODO: Why player will not start moving left if player is firing and moving up-right
 """
+import os
 import shmup.background as background
 import shmup.entity as entity
 import shmup.inputhandler as inputhandler
@@ -13,7 +14,7 @@ import shmup.level.level
 
 inputhandler.setup(DEBUG_MAP)
 
-
+print(os.getcwd())
 class GameScene(scenebase.Scene):
     """
     GameScene

@@ -5,6 +5,7 @@ Contains abstract base for Actor class
 import pygame as pg
 import shmup.spritesheet
 
+
 class Actor(pg.sprite.Sprite):
     """
     Active game entity base class

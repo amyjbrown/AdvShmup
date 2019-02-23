@@ -16,7 +16,7 @@ class Player(actor.Actor):
     Notes:
         Check Actor for all in-game structure
     """
-    IMAGE_PATH = "../assets/Ship.bmp"
+    IMAGE_PATH = "Ship.bmp"
     IMAGE = None
     init_flag = False
     HITBOX = pg.Rect(9, 6, 46, 52)

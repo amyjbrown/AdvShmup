@@ -3,6 +3,7 @@
 Testing Asteroid Hazard
 """
 # imports
+import os
 import pygame as pg
 from shmup.config import *
 import shmup.inputhandler as inputhandler
@@ -21,6 +22,7 @@ shmup.entity.HighPointToken.setup(mainscene)
 mainscene.load(reset=True)
 HUD = shmup.gui.textgui.TextGUI(mainscene)
 
+print(os.getcwd(), __file__)
 
 playing = True
 clock = pg.time.Clock()

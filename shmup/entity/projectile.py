@@ -21,7 +21,7 @@ class Bullet(pg.sprite.Sprite):
     init_flag = False
     OBSERVER = None
     IMAGE = None
-    IMAGE_PATH = "../assets/player bullet.bmp"
+    IMAGE_PATH = "player bullet.bmp"
     RECT = pg.Rect(0, 0, 16, 16)
     SPEED = -150  # Pixels per Second
     DAMAGE = 10
