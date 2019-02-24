@@ -1,5 +1,6 @@
 AdvShmup
 This is a simple scrolling shooter game designed as a challenge for software architecture
+Play by running Shmup.py from AdvShmup directory
 By Jonathan Brown
 
 
