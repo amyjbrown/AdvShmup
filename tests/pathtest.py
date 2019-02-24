@@ -20,9 +20,6 @@ screen = pg.display.set_mode(RESOLUTION)
 
 print(__file__)
 print(GLOBAL_PATH)
-print(GLOBAL_PATH[:-2])
-print(os.path.join(GLOBAL_PATH, "..", ".."))
-print(os.path.join(GLOBAL_PATH, os.pardir, os.pardir))
 
 # Game Loop
 # clock = pg.time.Clock()

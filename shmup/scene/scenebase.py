@@ -115,7 +115,7 @@ class SceneHandler:
 
     def __init__(self, scenes, intro):
         self.scenes = scenes
-        self.current = None
+        self.current = self.scenes[intro]
         pass
 
     def transition(self):
@@ -133,7 +133,7 @@ class SceneHandler:
             None
         """
         if self.current.next is not None:
-            new = self.current.scenes[self.current.next]
+            new = self.scenes[self.current.next]
             new.load(self.current.kwargs)
             # Check if should unload resources, if so perform shutdown
             if self.current.do_unload():
@@ -142,7 +142,7 @@ class SceneHandler:
             self.current = new
         return
 
-    def parse_input(self, *events):
+    def parse_input(self, events):
         """
         Parses all user input since last frame update
 
@@ -153,7 +153,8 @@ class SceneHandler:
             None
         """
         for event in events:
-            self.current.parse_input()
+            self.current.handle_input(event)
+            self.transition()
 
     def update(self, dt):
         """
@@ -166,6 +167,7 @@ class SceneHandler:
             None
         """
         self.current.update(dt)
+        self.transition()
 
     def draw(self, screen):
         """

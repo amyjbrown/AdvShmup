@@ -7,12 +7,15 @@ import pygame as pg
 from shmup.config import *
 import shmup.inputhandler as inputhandler
 import shmup.scene.gamescene
+import shmup.scene.scenebase
 import shmup.entity
 
 pg.init()
 screen = pg.display.set_mode(RESOLUTION)
-inputhandler.setup(DEBUG_MAP)
+inputhandler.setup(KEY_MAP)
 mainscene = shmup.scene.gamescene.GameScene()
+
+SceneHandler = shmup.scene.scenebase.SceneHandler({"game": mainscene}, "game")
 
 mainscene.load(reset=True)
 

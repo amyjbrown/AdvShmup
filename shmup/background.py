@@ -3,6 +3,7 @@
 Scrolling
 """
 import pygame as pg
+import shmup.spritesheet
 pg.init()
 
 
@@ -19,7 +20,7 @@ class BackGround:
         speed (float): Speed in pixels/frame
     """
     def __init__(self,  background, speed):
-        self.im = pg.image.load(background).convert()
+        self.im = shmup.spritesheet.load(background, False)
         self.h = self.im.get_height()
         self.y1 = 0
         self.y2 = -self.h

@@ -14,7 +14,8 @@ import sys, os
 import pygame as pg
 
 # Pathing
-GLOBAL_PATH = os.path.abspath("..")
+GLOBAL_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                           os.pardir)
 # os.path.join(os.path.dirname(__file__), "..", "..")
 
 # Screen size and Resolution

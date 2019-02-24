@@ -16,9 +16,8 @@ pg.init()
 inputhandler.setup(DEBUG_MAP)
 screen = pg.display.set_mode(RESOLUTION)
 
-rpath = r"../assets"
-shippath = os.path.join(rpath, "Ship.bmp")
-sheetpath = os.path.join(rpath, "IslandTiles.bmp")
+shippath = os.path.join(GLOBAL_PATH, "assets/Ship.bmp")
+sheetpath = os.path.join(GLOBAL_PATH, "assets/IslandTiles.bmp")
 
 # test items go here
 ship = spritesheet.load(
@@ -36,13 +35,13 @@ strip = spritesheet.get_list(
 )
 
 solo = spritesheet.get_image(
-    os.path.join(rpath, "IslandTiles.bmp"),
+    sheetpath,
     pg.Rect(64, 64, 64, 64),
     False
 )
 
 full_strip = spritesheet.get_full(
-    os.path.join(rpath, "IslandTiles.bmp"),
+    sheetpath,
     (64, 64),
     False
 )

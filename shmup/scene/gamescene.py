@@ -11,8 +11,9 @@ import shmup.inputhandler as inputhandler
 import shmup.scene.scenebase as scenebase
 from shmup.config import *
 import shmup.level.level
+import shmup.gui.textgui
 
-inputhandler.setup(DEBUG_MAP)
+# inputhandler.setup(DEBUG_MAP)
 
 print(os.getcwd())
 class GameScene(scenebase.Scene):
@@ -67,7 +68,9 @@ class GameScene(scenebase.Scene):
 
             self.player = entity.Player((100, 100))
 
-            self.background = background.BackGround("../assets/BG1.bmp", FPS)
+            self.background = background.BackGround("BG1.bmp", FPS)
+
+            self.gui = shmup.gui.textgui.TextGUI(self)
 
     def handle_input(self, event):
         """
@@ -209,3 +212,4 @@ class GameScene(scenebase.Scene):
         for g in self.groups:
             g.draw(screen)
         self.player_group.draw(screen)
+        self.gui.draw(screen)

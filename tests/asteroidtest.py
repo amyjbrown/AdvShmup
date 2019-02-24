@@ -20,7 +20,7 @@ mainscene = shmup.scene.gamescene.GameScene()
 shmup.entity.HighPointToken.setup(mainscene)
 
 mainscene.load(reset=True)
-HUD = shmup.gui.textgui.TextGUI(mainscene)
+# HUD = shmup.gui.textgui.TextGUI(mainscene)
 
 print(os.getcwd(), __file__)
 
@@ -50,5 +50,5 @@ while playing:
         break
     mainscene.draw(screen)
     # pg.display.set_caption(str(mainscene.player.health))
-    HUD.draw(screen, dt)
+    # HUD.draw(screen)
     pg.display.flip()
