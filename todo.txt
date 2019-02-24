@@ -1,4 +1,0 @@
-Next:
-    Add player Bullet
-    Add player firing mechanic
-    Add powerup

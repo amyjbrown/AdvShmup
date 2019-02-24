@@ -1,4 +1,0 @@
-Current Goals:
-
-[1/21/19]: Implemented the assetloading library/ API
-InputHandling library is a GO()
