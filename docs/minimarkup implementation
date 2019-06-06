@@ -1,0 +1,48 @@
+WordWrap function from en.wikipedia.org/wiki/Line_wrap_and_word_wrap
+"""
+SpaceLeft := LineWidth
+for each Word in Text
+    if (Width(Word) + SpaceWidth) > SpaceLeft
+        insert line break before Word in Text
+        SpaceLeft := LineWidth - Width(Word)
+    else
+        SpaceLeft := SpaceLeft - (Width(Word) + SpaceWidth)
+"""
+
+drawing implementation
+LineWidth = int
+func Length<Str> -> int in pixels
+SpaceWidth <- int
+Word <- ''
+for glyph in text{
+
+if glyph is Control character or Tag Start
+    Handle appropriately
+
+elif glyph is whitespace or text end
+
+    while Length(Word) > LineWidth
+        Draw what can fit of the word on the line
+        Remove drawn text from Word
+        Jump Line
+
+    if (Length(Word) +SpaceWidth) > SpaceLeft
+        JumpLine
+        DrawWord
+        Push Cursor by (Length(Word) + SpaceWidth)
+        Clear Word
+        SpaceLeft = SpaceLeft - (Width(Word) + SpaceWidth)
+
+    else
+        Draw Word
+        Clear Word
+        Push Cursor by Length(Word) + SpaceWidth
+        SpaceLeft -= (Width(Word) + SpaceWidth)
+else
+    Append Glyph to Word
+
+-----------------------------------
+MetaImp:
+Walk through text to check for globals and set properties
+Draw Glyph as above
+Using global metadata, post the temporary image onto the regular image

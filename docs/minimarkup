@@ -1,0 +1,19 @@
+# MiniMarkup
+This is a file on the Minimarkup minimarkup language, it's specs, and it's behavior and implementation
+
+What is MiniMarkup?
+MiniMarkup is a mini-markup language used for basic pygame text rendering facilities lacking in the core SDL library
+
+All MiniMarkup files are ASCII or UTF-8 encoded text files, or appropriate strings
+
+All markup files are composed of the following:
+* Text, or Glyphs: Basic UTF-8 Encoded text glyphs,
+* Control Characters, like /n [Technically Text, but treated in a special way
+* Tags, of the form '<'...'>'
+
+These tags let you perform special operations on the text as it's being drawn, as well as higher level functions, from
+text itself
+
+For more information, please check
+*MiniMarkup Spec and commands
+*MiniMarkup Implementation

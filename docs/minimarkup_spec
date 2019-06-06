@@ -1,0 +1,54 @@
+All unicode LtR characters should be supported, but that is undefined for now
+
+File := %*
+
+List of Tags and Operations, Notes
+//Globals, those that can only be set once
+<canvas = n, m> CORE
+Sets the local canvas text is written on in terms of pixels (for now)
+
+<origin = x, y> CORE
+point of origin where local Surface will be pasted onto Target surface
+NONCORE
+Absent, this value is to be
+
+<anchor = t> CORE
+what point the local surface will use as the "Origin"
+Types include Left, Right, Top, Bottom, TL, TR, BL, BR, Center
+If this tag is absent, value = TL
+
+1---2---3
+|   |   |
+4---5---6
+|   |   |
+7---8---9
+1=TL, 2 T, 3 TR, 4 L, 5 C, etc
+
+
+<def_color = color>
+Default color value
+If this tag is absent, default = (255,255,255) BLACK
+Type can either be a name (like RED) or a 3tuple of R,G,B
+
+//Local
+Font Types: All font types (italic, bold, underline) are off by default)
+
+<i>
+Set the Drawer to use the Italic font version, hence all text following <i> but before an optional </t> is italic
+</i>
+set the Drawer to use the non-italic font
+
+<b></b>
+Set the following text before any </b> to be bold
+
+<u></u>
+Set the following text before an optional </u> to be bold
+
+<norm>
+Sets text to non-Italic, non-Bold, and non-Underline
+
+Aliases: TODO
+
+<default>
+Set everything (font size, text types, color, etc.) to the defaults
+
