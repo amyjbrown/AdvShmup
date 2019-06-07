@@ -41,8 +41,8 @@ set the Drawer to use the non-italic font
 <b></b>
 Set the following text before any </b> to be bold
 
-<u></u>
-Set the following text before an optional </u> to be bold
+<u=n></u>
+Set the following text before an optional </u> to be underlined by width N (default is always non-underlined)
 
 <norm>
 Sets text to non-Italic, non-Bold, and non-Underline
@@ -51,4 +51,26 @@ Aliases: TODO
 
 <default>
 Set everything (font size, text types, color, etc.) to the defaults
+-------------------------------------------------------------------
+NonCore, Experimental
+<margins= l, t, r> GLOBAL
+Puts down the Left (l), Top(t), and Right (r) margins
+Default values if not-implemented 0,0,0
 
+<align = S >, </align>
+Align the text following the tag according to direction
+Left or L left aligns, Right or R right-aligns, Center or C is center aligned
+Justified is too much for this sort of work
+<de_align = S>
+Default Alignment Style
+
+Other Details or Ideas
+Number Spec -
+In dealing with screenspace, values can be set as either Np (N pixels), Nr (N relative screenspace)
+maybe Ng for N (average) glyphs?
+
+<speed = T> maybe Global? It'd be hellish for some of my other features
+Default rendering speed, that is, delay between glyph rendering
+Value of 0 means there is no delay and it fully draws it
+Unknown if this should be global, since you can easily change the delay counter, and have it be global, e.g. SUPERFAST
+Maybe Delete Text as you move through it if T is negative?

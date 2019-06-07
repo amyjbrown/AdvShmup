@@ -46,3 +46,25 @@ MetaImp:
 Walk through text to check for globals and set properties
 Draw Glyph as above
 Using global metadata, post the temporary image onto the regular image
+
+Idea for handling text alighnment
+Break text into Para demarcated by "\n"
+For every Para, draw text onto temp surface
+At para end, draw the para onto the local surface with the margins of the Rect either at the left or right for left right
+or centered for Centered
+-------------------------------------
+
+Another way of breaking it down
+L Text -> List<str|Command>
+Strip Text down to list of Strings or Commands
+Check through for Globals/Defaults
+
+COMMAND{
+TYPE: Enum Command/Str
+GLOBAL: bool
+*Values}
+e.g.
+{TYPE: COLORNUM
+GLOBAL No
+*VALUES: 0, 0, 0
+}
